@@ -1,0 +1,19 @@
+{
+  "name": "lofi-today-downloader",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon index.js -e js,ejs"
+  },
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.1",
+    "node-id3": "^0.2.3",
+    "soundcloud-scraper": "^5.0.2"
+  },
+  "author": "",
+  "license": "ISC"
+}

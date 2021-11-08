@@ -1,0 +1,26 @@
+
+
+
+
+<% if(errorAlert === "") { %>
+
+<% } else { %>
+    <div class="alert alert-danger" role="alert">
+        <b>Błąd: </b> <%= errorAlert %> 
+    </div>
+<% } %>
+
+
+<br></br>
+
+<div class="container">
+    <form method="POST">
+        <div class="mb-3">
+        <label class="form-label" style="color: white">Soundcloud music URL</label>
+        <input type="text" class="form-control" name="link" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Dalej</button>
+    </form>
+</div>
+
+
