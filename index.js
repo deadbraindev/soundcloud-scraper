@@ -24,6 +24,7 @@ app.get('/', (req, res) => {
 app.get('/queue', (req, res) => {
 
   res.render('queue');
+  
 });
 
 
