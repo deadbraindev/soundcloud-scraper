@@ -5,15 +5,23 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>add</title>
+
+    <script type="text/javascript" src="/public/public.js"></script>
+    <link rel="stylesheet" href="/public/public.css">
+
 </head>
 <body>
+    <h1>sources:</h1>
+    <button class="btn btn-primary" onclick="addRow()">add</button>
     <form action="/queue" method="POST">
-        <div class="form-grup">
-            <label for="sourcelink" class="form-control">Source:</label>
-            <input type="text" class="form-control" name="sourcelink" id="sourcelink">
-        </div>
-        
-        <button type="submit" class="btn btn-primary">add</button> 
+
+        <ol id="dynamic-list">
+            <li><input value="https://soundcloud.com/muzykolega/always-i-recognize-you" type="text" class="form-control sourcelink" name="sourcelink"></li>            
+        </ol>
+
+        <button type="submit" class="btn btn-primary">next</button> 
     </form>
+
+    
 </body>
 </html>

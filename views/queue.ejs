@@ -8,31 +8,47 @@
 </head>
 <body>
     <form action="/download" method="post">
-        <div class="form-grup">
-            <label for="artist" class="form-control">artist:</label>
-            <input value="<%= song.author.name %>" type="text" class="form-control" name="artist" id="artist">
-        </div>
-        <div class="form-grup">
-            <label for="title" class="form-control">title:</label>
-            <input value="<%= song.title %>" type="text" class="form-control" name="title" id="title">
-        </div>
-        <div class="form-grup">
-            <label for="soundcloud" class="form-control">soundcloud:</label>
-            <input value="<%= song.author.url %>" type="text" class="form-control" name="soundcloud" id="soundcloud">
-        </div>
-        <div class="form-grup">
-            <label for="spotify" class="form-control">spotify:</label>
-            <input type="text" class="form-control" name="spotify" id="spotify">
-        </div>
-        <div class="form-grup">
-            <label for="youtube" class="form-control">youtube:</label>
-            <input type="text" class="form-control" name="youtube" id="youtube">
-        </div>
-        <div class="form-grup">
-            <label for="sourcelink" class="form-control">sourcelink:</label>
-            <input value="<%= song.url %>" type="text" class="form-control" name="sourcelink" id="sourcelink">
-        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th for="artist" class="form-control">artist:</th>
+                    <th for="title" class="form-control">title:</th>
+                    <th for="soundcloud" class="form-control">soundcloud:</th>
+                    <th for="spotify" class="form-control">spotify:</th>
+                    <th for="youtube" class="form-control">youtube:</th>
+                    <th for="sourcelink" class="form-control">sourcelink:</th>
+                </tr>
+            </thead>
+            
+            <% songs.forEach((song, index) => { %>
+                <tr>
+                    <td class="form-grup" >
+                        <input value="<%= song.artist %>" type="text" class="form-control" name="artist" id="artist">
+                    </td>
+                    <td class="form-grup">
+                        <input value="<%= song.title %>" type="text" class="form-control" name="title" id="title">
+                    </td>
+                    <td class="form-grup">
+                        <input value="<%= song.album %>" type="text" class="form-control" name="soundcloud" id="soundcloud">
+                    </td>
+                    <td class="form-grup">
+                        <input type="text" class="form-control" name="spotify" id="spotify">
+                    </td>
+                    <td class="form-grup">
+                        <input type="text" class="form-control" name="youtube" id="youtube">
+                    </td>
+                    <td class="form-grup">
+                        <input value="<%= song.subtitle %>" type="text" class="form-control" name="sourcelink" id="sourcelink">
+                    </td>
+                    
+                </tr>
+            <% }); %>
+
+        </table>
+
         <button type="submit" class="btn btn-primary">download</button> 
+    
     </form>
 
 </body>
