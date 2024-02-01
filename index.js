@@ -8,7 +8,6 @@ const path = require('path');
 
 const request = require('request'); //pobieranie jpg
 
-
 const app = express();
 const port = 3000;
 
@@ -18,42 +17,7 @@ app.set('view engine', 'ejs');
 //dodanie folderu publicznego z js, css itd.
 app.use("/public", express.static('public'));
 
-// app.use(express.urlencoded({ extended: false }));
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-
-// function getMusicInfo(songUrl, arr) {
-//   client.getSongInfo(songUrl)
-//   .then(songInfo => {
-//     arr.push(
-//       {
-//       title: songInfo.title,
-//       artist: songInfo.author.name,
-//       album: songInfo.author.url,
-//       composer: "",
-//       genre: "",
-//       subtitle: songInfo.url,
-//       image: songInfo.thumbnail,
-//     })
-//     console.log("arr push")
-//   })
-//   .catch(console.error);
-// };
-
-// async function getSongs1(arrSongs, arrSourcelinks) {
-//   const promises = await arrSourcelinks.map(async item => {
-//     const numItem = new Promise((resolve, reject) => {
-//       getMusicInfo(item, arrSongs);
-//       resolve(item);
-//     });
-//     return numItem;
-//     })
-//     const numItems = await Promise.all(promises);
-//     console.log(numItems + "aaa");
-    
-//     console.log("end map");
-// }
-
 
 async function getSongs(arrSongs, arrSourcelinks) {  
   for await (const [i, sourcelink] of arrSourcelinks.entries()) {
@@ -69,10 +33,7 @@ async function getSongs(arrSongs, arrSourcelinks) {
       subtitle: songInfo.url,
       image: songInfo.thumbnail,
     })
-
     console.log(i+1 + "/" + arrSourcelinks.length)
-
-
     })
     .catch(console.error);
   }
@@ -103,7 +64,6 @@ async function updateSongsTags(arrSongs, arrEdited) {
 
 let songsTags = new Array();
 
-
 //get
 app.get('/', (req, res) => {
 
@@ -115,60 +75,39 @@ app.get('/queue', (req, res) => {
   res.render('queue');
 });
 
-
-
-
 let sourcelinks;
-
-
 
 //post
 app.post('/queue', urlencodedParser, (req, res) => {
-
     if(typeof req.body.sourcelink === "string") {
       sourcelinks = new Array(req.body.sourcelink);
-
     }
     else {
       sourcelinks = req.body.sourcelink;
-
     }
- 
+
   async function rend() {
     await getSongs(songsTags, sourcelinks);
     res.render('queue', {songs: songsTags});
   }
-  // const tags = NodeID3.read(`./music/muzykolega - Always i recognize You.mp3`)
-  // console.log(tags);
-
   rend();
 });
-
-
-
-
 
 async function downloadSong(arrSourcelinks) {
   for await (const [i, sourcelink] of arrSourcelinks.entries()) {
     client.getSongInfo(sourcelink)
     .then(async songInfo => {
-
       const filepath = `${songsTags[i].artist} - ${songsTags[i].title}`
-
       const stream = await songInfo.downloadProgressive();
       const writer = stream.pipe(fs.createWriteStream("./music/" + filepath + ".mp3"));
-
       writer.on("finish", () => {
         console.log("save song number: " + (i+1))
-
         download(songsTags[i].image, "./music/temp/" + filepath + ".jpg", () => {
           songsTags[i].image = "./music/temp/" + filepath + ".jpg";
           NodeID3.write(songsTags[i], "./music/" + filepath + ".mp3", function(err) { }); //wywolanie funkcji zapisu z node-id3
           console.log("tags song: " + (i+1))
           
         })
-      
-
       });
     })
     .catch(console.error);
@@ -180,28 +119,16 @@ const download = (url, path, callback) => {
     request(url)
       .pipe(fs.createWriteStream(path))
       .on("close", callback)
-    
   })
 }
 
-
-
-
-
-
-
-
 app.post('/download', urlencodedParser, (req, res) => {
-
   async function rend() {
     await updateSongsTags(songsTags, req.body)
-    await downloadSong(sourcelinks);
-    // console.log("ready")
-    
+    await downloadSong(sourcelinks);    
     res.json(req.body)
     console.log("complete!");
   }
-
   rend();    
 });
 
