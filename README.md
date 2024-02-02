@@ -1,5 +1,5 @@
 
-# <img src="https://raw.githubusercontent.com/deadbraindev/soundcloud-scraper/1aac4f1742f31884a7baab1ab2cc920509f18814/images/logo.svg?token=AKMZRNQRQGGD4Y2RU7RGLI3FXQSMA" widht="28px" height="28px" /> soundcloud scraper
+# <img src="https://raw.githubusercontent.com/deadbraindev/soundcloud-scraper/b38f68c9826938c62827e77c0f1a1971c6b35431/images/soundcloud-scraper-logo.svg" widht="28px" height="28px" /> soundcloud scraper
 
 
 Soundcloud scraper with the ability to edit mp3 tags. Designed to automate downloading and adding songs to [lofi.today radio](https://github.com/deadbraindev/lofi-today). The artist, title and artist link are included in the tags of the mp3 file, so they are always available for further scripts in OBS.
